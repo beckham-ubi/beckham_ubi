@@ -15,7 +15,7 @@ public class MainActivity extends Activity implements Runnable, SensorEventListe
     SensorManager sm;
     TextView tv;
     Handler h;
-    float gx, gy, gz;
+    float gx, gy, gz, gxyz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,8 @@ public class MainActivity extends Activity implements Runnable, SensorEventListe
     public void run() {
         tv.setText("X-axis : " + gx + "\n"
                 + "Y-axis : " + gy + "\n"
-                + "Z-axis : " + gz + "\n");
+                + "Z-axis : " + gz + "\n"
+                + "合成加速度 : " + gxyz+"\n");
         h.postDelayed(this, 500);
     }
 
@@ -68,6 +69,7 @@ public class MainActivity extends Activity implements Runnable, SensorEventListe
         gx = event.values[0];
         gy = event.values[1];
         gz = event.values[2];
+        gxyz =(float) Math.sqrt(gx*gx+gy*gy+gz*gz);
     }
 
     @Override
